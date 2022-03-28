@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox prefHeight="367.0" prefWidth="562.0">
+         <children>
+            <MenuBar>
+              <menus>
+                  <Menu mnemonicParsing="false" text="Consulta">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Pesquisar Consulta" />
+                    </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Paciente">
+                  <items>
+                    <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" text="Cadastro" />
+                        <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" text="Marcar Consulta" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Empresa">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Especialização" />
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" text="Medico" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Sobre">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Sistema" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
