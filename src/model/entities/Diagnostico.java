@@ -5,7 +5,9 @@ import java.util.Objects;
 public class Diagnostico {
 	private Integer IdDiag;
 	private String NomeDiag;
-
+	
+	public Diagnostico() {
+	}
 	public Diagnostico(Integer idDiag, String nomeDiag) {
 		this.IdDiag = idDiag;
 		this.NomeDiag = nomeDiag;

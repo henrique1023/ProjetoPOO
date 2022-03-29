@@ -1,16 +1,19 @@
 package model.entities;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Paciente {
 	private Integer IdPasciente;
 	private String nomePasciente;
-	private Integer idadePasciente;
+	private Date dataAniversario;
 
-	public Paciente(Integer idPasciente, String nomePasciente, Integer idadePasciente) {
+	public Paciente() {
+	}
+	public Paciente(Integer idPasciente, String nomePasciente, Date dataAniversario) {
 		this.IdPasciente = idPasciente;
 		this.nomePasciente = nomePasciente;
-		this.idadePasciente = idadePasciente;
+		this.dataAniversario = dataAniversario;
 	}
 
 	public Integer getIdPasciente() {
@@ -29,18 +32,18 @@ public class Paciente {
 		this.nomePasciente = nomePasciente;
 	}
 
-	public Integer getIdadePasciente() {
-		return idadePasciente;
+	public Date getDataAniversario() {
+		return dataAniversario;
 	}
 
-	public void setIdadePasciente(Integer idadePasciente) {
-		this.idadePasciente = idadePasciente;
+	public void setDataAniversario(Date dataAniversario) {
+		this.dataAniversario = dataAniversario;
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [IdPasciente=" + IdPasciente + ", nomePasciente=" + nomePasciente + ", idadePasciente="
-				+ idadePasciente + "]";
+		return "Paciente [IdPasciente=" + IdPasciente + ", nomePasciente=" + nomePasciente + ", dataAniversario="
+				+ dataAniversario + "]";
 	}
 
 	@Override

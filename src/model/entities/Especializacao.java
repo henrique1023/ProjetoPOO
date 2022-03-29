@@ -5,7 +5,9 @@ import java.util.Objects;
 public class Especializacao {
 	private Integer IdEspeci;
 	private String NomeEspeci;
-
+	
+	public Especializacao() {
+	}
 	public Especializacao(Integer idEspeci, String nomeEspeci) {
 		IdEspeci = idEspeci;
 		NomeEspeci = nomeEspeci;
