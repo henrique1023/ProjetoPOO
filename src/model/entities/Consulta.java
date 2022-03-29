@@ -8,7 +8,10 @@ public class Consulta {
 	private Paciente paciente;
 	private Profissional profissional;
 	private Date dataConsul;
-
+	
+	public Consulta() {
+	}
+	
 	public Consulta(Integer idConsulta, Diagnostico diagnostico, Paciente paciente, Profissional profissional,
 			Date dataConsul) {
 		this.idConsulta = idConsulta;
