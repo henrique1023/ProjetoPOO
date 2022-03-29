@@ -32,7 +32,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO consulta " + "(DataConsul, PascienteId, ProfissionalId, DiagnoId "
+			st = conn.prepareStatement("INSERT INTO consulta " + "(DataConsul, PacienteId, ProfissionalId, DiagnoId "
 					+ "VALUES " + "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setDate(1, new java.sql.Date(obj.getDataConsul().getTime()));
 			st.setInt(2, obj.getPaciente().getIdPasciente());
@@ -65,7 +65,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 
 		try {
 			st = conn.prepareStatement("UPDATE consulta "
-					+ "SET DataConsul = ?, PascienteId = ?, ProfissionalId = ?, DiagnoId = ? " + "WHERE Id = ?");
+					+ "SET DataConsul = ?, PacienteId = ?, ProfissionalId = ?, DiagnoId = ? " + "WHERE Id = ?");
 
 			st.setDate(1, new java.sql.Date(obj.getDataConsul().getTime()));
 			st.setInt(2, obj.getPaciente().getIdPasciente());
@@ -105,11 +105,11 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		ResultSet rs = null;
 
 		try {
-			st = conn.prepareStatement("SELECT consulta.*,paciente.NomePasc as PacNome, "
+			st = conn.prepareStatement("SELECT consulta.*,paciente.NomePaci as PacNome, "
 					+ "paciente.DataAniv as PacieData, " + "profissional.Email as ProfiEmail, "
 					+ "profissional.DataAniv as ProfiData, " + "profissional.SalarioBase as ProfiSal, "
 					+ "profissional.EspecId as ProfiEspec, " + "diagnostico.NomeDiagno as DiagnoNome "
-					+ "FROM consulta INNER JOIN paciente ON consulta.PascienteId = paciente.Id "
+					+ "FROM consulta INNER JOIN paciente ON consulta.PacienteId = paciente.Id "
 					+ "INNER JOIN profissional ON consulta.ProfissionalId = profissional.Id "
 					+ "INNER JOIN diagnostico ON consulta.DiagnoId = diagnostico.Id " + "WHERE consulta.IdConsul = ?");
 			st.setInt(1, id);
@@ -142,7 +142,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		prof.setEspecializacao(esp);
 		return prof;
 	}
-	
+
 	private Especializacao setEspec(ResultSet rs) throws SQLException {
 		PreparedStatement st = null;
 		ResultSet rss = null;
@@ -155,7 +155,8 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		return espec;
 	}
 
-	private Consulta instatiateConsulta(ResultSet rs, Paciente paciente, Profissional profi, Diagnostico diag) throws SQLException {
+	private Consulta instatiateConsulta(ResultSet rs, Paciente paciente, Profissional profi, Diagnostico diag)
+			throws SQLException {
 		Consulta consu = new Consulta();
 		consu.setIdConsulta(rs.getInt("IdConsul"));
 		consu.setDataConsul(new java.util.Date(rs.getTimestamp("DataConsul").getTime()));
@@ -172,7 +173,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("PacieData").getTime()));
 		return paciente;
 	}
-	
+
 	private Diagnostico instatiateDiagnostico(ResultSet rs) throws SQLException {
 		Diagnostico diag = new Diagnostico();
 		diag.setIdDiag(rs.getInt("DiagnoId"));
@@ -185,14 +186,13 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement(
-					"SELECT consulta.*,paciente.NomePasc as PacNome, "
-							+ "paciente.DataAniv as PacieData, " + "profissional.Email as ProfiEmail, "
-							+ "profissional.DataAniv as ProfiData, " + "profissional.SalarioBase as ProfiSal, "
-							+ "profissional.EspecId as ProfiEspec, " + "diagnostico.NomeDiagno as DiagnoNome "
-							+ "FROM consulta INNER JOIN paciente ON consulta.PascienteId = paciente.Id "
-							+ "INNER JOIN profissional ON consulta.ProfissionalId = profissional.Id "
-							+ "INNER JOIN diagnostico ON consulta.DiagnoId = diagnostico.Id " + "ORDER BY Id");
+			st = conn.prepareStatement("SELECT consulta.*,paciente.NomePaci as PacNome, "
+					+ "paciente.DataAniv as PacieData, " + "profissional.Email as ProfiEmail, "
+					+ "profissional.DataAniv as ProfiData, " + "profissional.SalarioBase as ProfiSal, "
+					+ "profissional.EspecId as ProfiEspec, " + "diagnostico.NomeDiagno as DiagnoNome "
+					+ "FROM consulta INNER JOIN paciente ON consulta.PascienteId = paciente.Id "
+					+ "INNER JOIN profissional ON consulta.ProfissionalId = profissional.Id "
+					+ "INNER JOIN diagnostico ON consulta.DiagnoId = diagnostico.Id " + "ORDER BY Id");
 
 			rs = st.executeQuery();
 
@@ -211,13 +211,13 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 					profi = instatiateProfissional(rs);
 					mapProf.put(rs.getInt("ProfissionalId"), profi);
 				}
-				
-				if(paci == null) {
+
+				if (paci == null) {
 					paci = instatiatePaciente(rs);
 					mapPasc.put(rs.getInt("PascienteId"), paci);
 				}
-				
-				if(diag == null) {
+
+				if (diag == null) {
 					diag = instatiateDiagnostico(rs);
 					mapDiag.put(rs.getInt("DianoId"), diag);
 				}
@@ -235,7 +235,5 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 			DB.closeStatement(st);
 		}
 	}
-
-
 
 }

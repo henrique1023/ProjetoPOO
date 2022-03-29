@@ -26,7 +26,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePasc, DataAniv) " + "VALUES " +
+			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv) " + "VALUES " +
 					"(?, ?)" ,
 					Statement.RETURN_GENERATED_KEYS);
 
@@ -142,7 +142,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 	private Paciente instatiatePaciente(ResultSet rs) throws SQLException {
 		Paciente paciente = new Paciente();
 		paciente.setIdPasciente(rs.getInt("Id"));
-		paciente.setNomePasciente(rs.getString("NomePasc"));
+		paciente.setNomePasciente(rs.getString("NomePaci"));
 		return paciente;
 	}
 

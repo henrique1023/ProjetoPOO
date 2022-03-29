@@ -19,14 +19,14 @@
                   </Menu>
                 <Menu mnemonicParsing="false" text="Paciente">
                   <items>
-                    <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" text="Cadastro" />
-                        <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" text="Marcar Consulta" />
+                    <MenuItem  mnemonicParsing="false" text="Cadastro" />
+                        <MenuItem mnemonicParsing="false" text="Marcar Consulta" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Empresa">
                   <items>
                         <MenuItem mnemonicParsing="false" text="Especialização" />
-                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" text="Medico" />
+                    <MenuItem mnemonicParsing="false" text="Medico" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Sobre">

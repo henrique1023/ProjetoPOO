@@ -4,32 +4,32 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Paciente {
-	private Integer IdPasciente;
-	private String nomePasciente;
+	private Integer IdPaciente;
+	private String nomePaciente;
 	private Date dataAniversario;
 
 	public Paciente() {
 	}
-	public Paciente(Integer idPasciente, String nomePasciente, Date dataAniversario) {
-		this.IdPasciente = idPasciente;
-		this.nomePasciente = nomePasciente;
+	public Paciente(Integer idPaciente, String nomePaciente, Date dataAniversario) {
+		this.IdPaciente = idPaciente;
+		this.nomePaciente = nomePaciente;
 		this.dataAniversario = dataAniversario;
 	}
 
 	public Integer getIdPasciente() {
-		return IdPasciente;
+		return IdPaciente;
 	}
 
-	public void setIdPasciente(Integer idPasciente) {
-		IdPasciente = idPasciente;
+	public void setIdPasciente(Integer idPaciente) {
+		IdPaciente = idPaciente;
 	}
 
 	public String getNomePasciente() {
-		return nomePasciente;
+		return nomePaciente;
 	}
 
-	public void setNomePasciente(String nomePasciente) {
-		this.nomePasciente = nomePasciente;
+	public void setNomePasciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
 	}
 
 	public Date getDataAniversario() {
@@ -42,13 +42,13 @@ public class Paciente {
 
 	@Override
 	public String toString() {
-		return "Paciente [IdPasciente=" + IdPasciente + ", nomePasciente=" + nomePasciente + ", dataAniversario="
+		return "Paciente [IdPaciente=" + IdPaciente + ", nomePaciente=" + nomePaciente + ", dataAniversario="
 				+ dataAniversario + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(IdPasciente);
+		return Objects.hash(IdPaciente);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class Paciente {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
-		return Objects.equals(IdPasciente, other.IdPasciente);
+		return Objects.equals(IdPaciente, other.IdPaciente);
 	}
 
 }
