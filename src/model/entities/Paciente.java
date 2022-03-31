@@ -16,7 +16,7 @@ public class Paciente {
 		this.dataAniversario = dataAniversario;
 	}
 
-	public Integer getIdPasciente() {
+	public Integer getIdPaciente() {
 		return IdPaciente;
 	}
 
@@ -28,7 +28,7 @@ public class Paciente {
 		return nomePaciente;
 	}
 
-	public void setNomePasciente(String nomePaciente) {
+	public void setNomePaciente(String nomePaciente) {
 		this.nomePaciente = nomePaciente;
 	}
 
