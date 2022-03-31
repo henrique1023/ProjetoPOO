@@ -6,32 +6,31 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
    <content>
-      <VBox prefHeight="367.0" prefWidth="562.0">
+      <VBox prefHeight="350.0" prefWidth="600.0">
          <children>
             <MenuBar>
               <menus>
                   <Menu mnemonicParsing="false" text="Consulta">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Pesquisar Consulta" />
+                      <MenuItem fx:id="menuItemConsulta" mnemonicParsing="false" onAction="#onMenuItemConsultaAction" text="Pesquisar/Marcar" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Paciente">
                   <items>
-                    <MenuItem  mnemonicParsing="false" text="Cadastro" />
-                        <MenuItem mnemonicParsing="false" text="Marcar Consulta" />
+                    <MenuItem fx:id="menuItemPaciente" mnemonicParsing="false" onAction="#onMenuItemPacienteAction" text="Cadastro" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Empresa">
                   <items>
-                        <MenuItem mnemonicParsing="false" text="Especialização" />
-                    <MenuItem mnemonicParsing="false" text="Medico" />
+                        <MenuItem fx:id="menuItemEspecializacao" mnemonicParsing="false" onAction="#onMenuItemEspecializacaoAction" text="Especialização" />
+                    <MenuItem fx:id="menuItemMedico" mnemonicParsing="false" onAction="#onMenuItemMedicoAction" text="Medico" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Sobre">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Sistema" />
+                      <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" onAction="#onMenuItemSobreAction" text="Sistema" />
                     </items>
                   </Menu>
               </menus>

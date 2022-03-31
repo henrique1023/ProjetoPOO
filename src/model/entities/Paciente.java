@@ -20,11 +20,11 @@ public class Paciente {
 		return IdPaciente;
 	}
 
-	public void setIdPasciente(Integer idPaciente) {
+	public void setIdPaciente(Integer idPaciente) {
 		IdPaciente = idPaciente;
 	}
 
-	public String getNomePasciente() {
+	public String getNomePaciente() {
 		return nomePaciente;
 	}
 

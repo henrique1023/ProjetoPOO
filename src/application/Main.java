@@ -1,8 +1,8 @@
 package application;
 
-import javafx.scene.control.ScrollPane;
 import java.io.IOException;
 
+import javafx.scene.control.ScrollPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +23,7 @@ public class Main extends Application {
 
 			mainScene = new Scene(scrollPane);
 			primaryStage.setScene(mainScene);
-			primaryStage.setTitle("Consulto Mario Cantano!");
+			primaryStage.setTitle("Consultório Mário Caetano");
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

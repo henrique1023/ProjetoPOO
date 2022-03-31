@@ -35,7 +35,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 			st = conn.prepareStatement("INSERT INTO consulta " + "(DataConsul, PacienteId, ProfissionalId, DiagnoId "
 					+ "VALUES " + "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setDate(1, new java.sql.Date(obj.getDataConsul().getTime()));
-			st.setInt(2, obj.getPaciente().getIdPasciente());
+			st.setInt(2, obj.getPaciente().getIdPaciente());
 			st.setInt(3, obj.getProfissional().getIdProfi());
 			st.setInt(4, obj.getDiagnostico().getIdDiag());
 
@@ -68,7 +68,7 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 					+ "SET DataConsul = ?, PacienteId = ?, ProfissionalId = ?, DiagnoId = ? " + "WHERE Id = ?");
 
 			st.setDate(1, new java.sql.Date(obj.getDataConsul().getTime()));
-			st.setInt(2, obj.getPaciente().getIdPasciente());
+			st.setInt(2, obj.getPaciente().getIdPaciente());
 			st.setInt(3, obj.getProfissional().getIdProfi());
 			st.setInt(4, obj.getDiagnostico().getIdDiag());
 			st.setInt(6, obj.getIdConsulta());
@@ -168,8 +168,8 @@ public class ConsultaDaoJDBC implements ConsultaDao {
 
 	private Paciente instatiatePaciente(ResultSet rs) throws SQLException {
 		Paciente paciente = new Paciente();
-		paciente.setIdPasciente(rs.getInt("PacienteId"));
-		paciente.setNomePasciente(rs.getString("PascNome"));
+		paciente.setIdPaciente(rs.getInt("PacienteId"));
+		paciente.setNomePaciente(rs.getString("PascNome"));
 		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("PacieData").getTime()));
 		return paciente;
 	}

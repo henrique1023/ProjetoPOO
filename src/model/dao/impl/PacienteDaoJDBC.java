@@ -30,7 +30,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 					"(?, ?)" ,
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, obj.getNomePasciente());
+			st.setString(1, obj.getNomePaciente());
 			st.setDate(2, new java.sql.Date(obj.getDataAniversario().getTime()));
 
 			int rowAffected = st.executeUpdate();
@@ -39,7 +39,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 				ResultSet rs = st.getGeneratedKeys();
 				if (rs.next()) {
 					int id = rs.getInt(1);
-					obj.setIdPasciente(id);
+					obj.setIdPaciente(id);
 				}
 				DB.closeResultSet(rs);
 			} else {
@@ -59,7 +59,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 
 		try {
 			st = conn.prepareStatement("UPDATE paciente " + "SET NomePasc = ?, DataAniv = ? " + "WHERE Id = ?");
-			st.setString(1, obj.getNomePasciente());
+			st.setString(1, obj.getNomePaciente());
 			st.setDate(2, new java.sql.Date(obj.getDataAniversario().getTime()));
 
 			st.executeUpdate();
@@ -141,8 +141,8 @@ public class PacienteDaoJDBC implements PacienteDao {
 
 	private Paciente instatiatePaciente(ResultSet rs) throws SQLException {
 		Paciente paciente = new Paciente();
-		paciente.setIdPasciente(rs.getInt("Id"));
-		paciente.setNomePasciente(rs.getString("NomePaci"));
+		paciente.setIdPaciente(rs.getInt("Id"));
+		paciente.setNomePaciente(rs.getString("NomePaci"));
 		return paciente;
 	}
 
