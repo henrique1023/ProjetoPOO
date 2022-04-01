@@ -26,9 +26,11 @@
       </ToolBar>
       <TableView fx:id="tableViewPaciente" prefHeight="300.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="tableColumnId" prefWidth="111.0" text="ID PACIENTE" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="114.0" text="NOME" />
-            <TableColumn fx:id="tableColumnData" prefWidth="156.0" text="DATA ANIVERSARIO" />
+          <TableColumn fx:id="tableColumnId" prefWidth="100.0" text="ID PACIENTE" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="82.0" text="NOME" />
+            <TableColumn fx:id="tableColumnData" prefWidth="129.0" text="DATA ANIVERSARIO" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" />
         </columns>
       </TableView>
    </children>
