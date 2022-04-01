@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,6 +144,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		Paciente paciente = new Paciente();
 		paciente.setIdPaciente(rs.getInt("Id"));
 		paciente.setNomePaciente(rs.getString("NomePaci"));
+		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("DataAniv").getTime()));
 		return paciente;
 	}
 

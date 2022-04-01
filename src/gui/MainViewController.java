@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.PacienteService;
 
 public class MainViewController implements Initializable {
 	
@@ -36,7 +37,10 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	private void onMenuItemPacienteAction() {
-		System.out.println("OK");
+		loadView("/gui/PacienteList.fxml",(PacienteListController controller) ->{
+			controller.setPacienteService(new PacienteService() );
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
@@ -60,8 +64,7 @@ public class MainViewController implements Initializable {
 	}
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	public void initialize(URL url, ResourceBundle rb) {
 		
 	}
 	
