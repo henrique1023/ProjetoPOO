@@ -1,11 +1,13 @@
 package gui;
 
+
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -19,11 +21,11 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import model.entities.Paciente;
 import model.exceptions.ValidationException;
 import model.services.PacienteService;
@@ -33,6 +35,8 @@ public class PacienteFormController implements Initializable {
 	private Paciente entidade;
 
 	private PacienteService service;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	@FXML
@@ -102,7 +106,7 @@ public class PacienteFormController implements Initializable {
 
 		ValidationException exception = new ValidationException("Validation Errors");
 
-		obj.setIdPaciente(Utils.tryParseToInt(txtId.getText()));
+//		obj.setIdPaciente(Utils.tryParseToInt(txtId.getText()));
 
 		obj.setNomePaciente(txtNome.getText());
 		
@@ -135,7 +139,6 @@ public class PacienteFormController implements Initializable {
 	}
 
 	public void initializeNodes() {
-		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtNome, 30);
 		Utils.formatDatePicker(dpDataAniv, "dd/MM/yyyy");
 	}
@@ -145,12 +148,12 @@ public class PacienteFormController implements Initializable {
 		if (entidade == null) {
 			throw new IllegalStateException("Entity was null!!");
 		}
-		txtId.setText(String.valueOf(entidade.getIdPaciente()));
 		txtNome.setText(entidade.getNomePaciente());
 
 		// se a data na entidade estiver vazia ele manda nulo para a tela
 		if (entidade.getDataAniversario() != null) {
-			dpDataAniv.setValue(LocalDate.ofInstant(entidade.getDataAniversario().toInstant(), ZoneId.systemDefault()));
+			dpDataAniv.setValue(LocalDate.parse(sdf.format(entidade.getDataAniversario()).toString()));
+			
 		}
 	}
 	
