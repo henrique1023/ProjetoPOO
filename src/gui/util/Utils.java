@@ -73,7 +73,7 @@ public class Utils {
 						setText(null);
 					} else {
 						Locale.setDefault(Locale.US);
-						setText(String.format("%." + decimalPlaces + "f", item));
+						setText(String.format("R$ %." + decimalPlaces + "f", item));
 					}
 				}
 			};

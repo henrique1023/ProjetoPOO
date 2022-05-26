@@ -74,7 +74,7 @@ public class Profissional {
 	@Override
 	public String toString() {
 		return "Profissional [especializacao=" + especializacao + ", idProfi=" + idProfi + ", nome=" + nome + ", email="
-				+ email + ", dataAniver=" + dataAniver + ", salarioBase=" + salarioBase + "]";
+				+ email + ", dataAniver=" + dataAniver + ", salarioBase= R$" + salarioBase + "]";
 	}
 
 }

@@ -31,7 +31,7 @@ public class Especializacao {
 
 	@Override
 	public String toString() {
-		return "Especialização [IdEspeci=" + IdEspeci + ", NomeEspeci=" + NomeEspeci + "]";
+		return NomeEspeci;
 	}
 
 	@Override

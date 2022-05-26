@@ -140,6 +140,7 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 	private Especializacao instatiateEspecializacao(ResultSet rs) throws SQLException {
 		Especializacao espec = new Especializacao();
 		espec.setIdEspeci(rs.getInt("Id"));
+		espec.setNomeEspeci(rs.getString("NomeEspec"));
 		return espec;
 	}
 }

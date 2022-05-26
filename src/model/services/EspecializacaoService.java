@@ -8,7 +8,7 @@ import model.entities.Especializacao;
 
 public class EspecializacaoService {
 
-	private EspecializacaoDao dao = new DaoFactory().createEspecializacaoDao();
+	private EspecializacaoDao dao = DaoFactory.createEspecializacaoDao();
 	
 	public List<Especializacao> findAll(){
 		return dao.findAll();

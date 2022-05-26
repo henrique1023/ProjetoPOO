@@ -159,7 +159,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 			while (rs.next()) {
 
-				Especializacao espec = map.get(rs.getInt("EspecializacaoId"));
+				Especializacao espec = map.get(rs.getInt("EspecId"));
 
 				if (espec == null) {
 					espec = instatiateEspecializacao(rs);
