@@ -90,7 +90,7 @@ public class MedicoListController implements Initializable, DataChangeListener{
 			updateTableView();
 			initializeNodes();
 		}else {
-			List<Profissional> list = medicoService.findByNome(txtCampoBuscar.getText().toString());
+			List<Profissional> list = medicoService.findByNome(txtCampoBuscar.getText());
 			obsList = FXCollections.observableArrayList(list);
 			tableViewProfissional.setItems(obsList);
 			initializeNodes();
@@ -151,7 +151,7 @@ public class MedicoListController implements Initializable, DataChangeListener{
 
 			Stage dialogStage = new Stage();
 
-			dialogStage.setTitle("Enter Department Data");
+			dialogStage.setTitle("Modificar Médico");
 			// passa o FXML departmentForm como cena
 			dialogStage.setScene(new Scene(pane));
 			// Essa janela não pode ser redimencionada

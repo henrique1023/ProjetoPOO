@@ -23,7 +23,7 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
-            <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#onBtBuscar" text="Button" />
+            <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#onBtBuscar" text="Buscar" />
             <TextField fx:id="txtCampoBuscar" />
         </items>
       </ToolBar>

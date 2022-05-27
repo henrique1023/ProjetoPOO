@@ -29,7 +29,7 @@ public class Utils {
 			return null;
 		}
 	}
-	
+
 	public static Double tryParseToDouble(String str) {
 		try {
 			return Double.parseDouble(str);
@@ -74,6 +74,53 @@ public class Utils {
 					} else {
 						Locale.setDefault(Locale.US);
 						setText(String.format("R$ %." + decimalPlaces + "f", item));
+					}
+				}
+			};
+			return cell;
+		});
+	}
+
+	public static <T> void formatTableColumnCpf(TableColumn<T, String> tableColumn) {
+		tableColumn.setCellFactory(column -> {
+			TableCell<T, String> cell = new TableCell<T, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty ) {
+						setText(null);
+					} else {
+						if (item != "" && item != null) {
+							Locale.setDefault(Locale.US);
+							String primeira = item.substring(0, 3);
+							String segunda = item.substring(3, 6);
+							String terceira = item.substring(6, 9);
+							String quarta = item.substring(8, 10);
+							setText(String.format(primeira + "." + segunda + "." + terceira + "-" + quarta));
+						}
+					}
+				}
+			};
+			return cell;
+		});
+	}
+	
+	public static <T> void formatTableColumnTelefone(TableColumn<T, String> tableColumn) {
+		tableColumn.setCellFactory(column -> {
+			TableCell<T, String> cell = new TableCell<T, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty ) {
+						setText(null);
+					} else {
+						if (item != "" && item != null) {
+							Locale.setDefault(Locale.US);
+							String primeira = item.substring(0, 2);
+							String segunda = item.substring(2, 7);
+							String terceira = item.substring(7, 11);
+							setText(String.format("(" + primeira + ") " + segunda + "-" + terceira));
+						}
 					}
 				}
 			};

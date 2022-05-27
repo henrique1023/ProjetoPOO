@@ -9,5 +9,6 @@ public interface PacienteDao {
 	void update(Paciente obj);
 	void deleteById(Integer id);
 	Paciente findById(Integer id);
+	List<Paciente> findByNome(String nome);
 	List<Paciente> findAll();
 }

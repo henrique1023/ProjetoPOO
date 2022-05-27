@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.net.URL;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -35,30 +34,39 @@ public class PacienteFormController implements Initializable {
 	private Paciente entidade;
 
 	private PacienteService service;
-	
+
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	@FXML
 	private Button btSave;
-	
+
 	@FXML
 	private Button btCancel;
-	
-	@FXML
-	private TextField txtId;
 
 	@FXML
 	private TextField txtNome;
 
 	@FXML
+	private TextField txtCpf;
+
+	@FXML
+	private TextField txtTelefone;
+
+	@FXML
 	private DatePicker dpDataAniv;
-	
+
 	@FXML
 	private Label labelErrorNome;
-	
+
 	@FXML
 	private Label labelErrorData;
+	
+	@FXML
+	private Label labelErrorCpf;
+	
+	@FXML
+	private Label labelErrorTelefone;
 
 	public void setEntidade(Paciente entidade) {
 		this.entidade = entidade;
@@ -106,20 +114,35 @@ public class PacienteFormController implements Initializable {
 
 		ValidationException exception = new ValidationException("Validation Errors");
 
-//		obj.setIdPaciente(Utils.tryParseToInt(txtId.getText()));
-
+		obj.setIdPaciente(entidade.getIdPaciente());
 		obj.setNomePaciente(txtNome.getText());
-		
-		if(txtNome.getText() == null || txtNome.getText().trim().equals("")) {
-			exception.addError("nome", "Fields can't be emply");
+
+		if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+			exception.addError("nome", "Campo não preenchido");
 		}
-		
+
 		if (dpDataAniv.getValue() == null) {
-			exception.addError("dataAniv", "Fields can't be emply");
-		}else {
+			exception.addError("dataAniv", "Campo não preenchido");
+		} else {
 			Instant instant = Instant.from(dpDataAniv.getValue().atStartOfDay(ZoneId.systemDefault()));
-		
+
 			obj.setDataAniversario(Date.from(instant));
+		}
+
+		if (txtCpf.getText() == null || txtCpf.getText().trim().equals("")) {
+			obj.setCpf(null);
+		}else if (txtCpf.getText().length() < 11) {
+			exception.addError("cpf", "Campo preenchido incorretamente");
+		}else {
+			obj.setCpf(txtCpf.getText());
+		}
+
+		if (txtTelefone.getText() == null || txtTelefone.getText().trim().equals("")) {
+			obj.setTelefone(null);
+		} else if (txtCpf.getText().length() < 11){
+			exception.addError("telefone", "Campo preenchido incorretamente");
+		}else {
+			obj.setTelefone(txtTelefone.getText());
 		}
 
 		if (exception.getErrors().size() > 0) {
@@ -140,6 +163,10 @@ public class PacienteFormController implements Initializable {
 
 	public void initializeNodes() {
 		Constraints.setTextFieldMaxLength(txtNome, 30);
+		Constraints.setTextFieldInteger(txtCpf);
+		Constraints.setTextFieldInteger(txtTelefone);
+		Constraints.setTextFieldMaxLength(txtCpf, 11);
+		Constraints.setTextFieldMaxLength(txtTelefone, 11);
 		Utils.formatDatePicker(dpDataAniv, "dd/MM/yyyy");
 	}
 
@@ -153,21 +180,32 @@ public class PacienteFormController implements Initializable {
 		// se a data na entidade estiver vazia ele manda nulo para a tela
 		if (entidade.getDataAniversario() != null) {
 			dpDataAniv.setValue(LocalDate.parse(sdf.format(entidade.getDataAniversario()).toString()));
-			
+
+		}
+
+		txtCpf.setText(entidade.getCpf());
+		txtTelefone.setText(entidade.getTelefone());
+	}
+
+	// esse metodo verifica se tem o erro e manda ele para o label
+	public void setErrorsMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+
+		if (fields.contains("nome")) {
+			labelErrorNome.setText(errors.get("nome"));
+		}
+
+		if (fields.contains("dataAniv")) {
+			labelErrorNome.setText(errors.get("dataAniv"));
+		}
+		
+		if (fields.contains("cpf")) {
+			labelErrorCpf.setText(errors.get("cpf"));
+		}
+		
+		if (fields.contains("telefone")) {
+			labelErrorTelefone.setText(errors.get("telefone"));
 		}
 	}
-	
-	//esse metodo verifica se tem o erro e manda ele para o label
-		public void setErrorsMessages(Map<String, String> errors) {
-			Set<String> fields = errors.keySet();
-			
-			if(fields.contains("nome")) {
-				labelErrorNome.setText(errors.get("nome"));
-			}
-			
-			if(fields.contains("dataAniv")) {
-				labelErrorNome.setText(errors.get("dataAniv"));
-			}
-		}
 
 }

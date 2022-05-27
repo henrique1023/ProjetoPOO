@@ -41,7 +41,10 @@ public class PacienteListController implements Initializable, DataChangeListener
 	private TableView<Paciente> tableViewPaciente;
 	
 	@FXML
-	private TableColumn<Paciente, Integer> tableColumnId;
+	private TableColumn<Paciente, String> tableColumnCpf;
+	
+	@FXML
+	private TableColumn<Paciente, String> tableColumnTel;
 	
 	@FXML
 	private TableColumn<Paciente, String> tableColumnNome;
@@ -75,9 +78,12 @@ public class PacienteListController implements Initializable, DataChangeListener
 	
 	private void initializeNodes() {
 		// essa função inicia os valores dentro das tabelas
-		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("IdPaciente"));
+		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
 		tableColumnData.setCellValueFactory(new PropertyValueFactory<>("dataAniversario"));
+		tableColumnTel.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+		Utils.formatTableColumnTelefone(tableColumnTel);
+		Utils.formatTableColumnCpf(tableColumnCpf);
 		Utils.formatTableColumnDate(tableColumnData, "dd/MM/yyyy");
 
 		// essa metodo faz a tabela acompanhar o tamanho da tela
@@ -102,7 +108,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 
 			Stage dialogStage = new Stage();
 
-			dialogStage.setTitle("Enter Department Data");
+			dialogStage.setTitle("Entre com um Paciente");
 			// passa o FXML departmentForm como cena
 			dialogStage.setScene(new Scene(pane));
 			// Essa janela não pode ser redimencionada

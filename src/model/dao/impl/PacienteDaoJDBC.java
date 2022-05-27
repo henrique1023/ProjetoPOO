@@ -26,12 +26,14 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv) " + "VALUES " +
-					"(?, ?)" ,
+			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv, cpf, telefone) " + "VALUES " +
+					"(?, ?, ?, ?)" ,
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNomePaciente());
 			st.setDate(2, new java.sql.Date(obj.getDataAniversario().getTime()));
+			st.setString(3, obj.getCpf());
+			st.setString(4, obj.getTelefone());
 
 			int rowAffected = st.executeUpdate();
 
@@ -58,9 +60,13 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE paciente " + "SET NomePasc = ?, DataAniv = ? " + "WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE paciente " + "SET NomePaci = ?, DataAniv = ?, cpf = ?, telefone = ? " 
+										+ "WHERE Id = ?");
 			st.setString(1, obj.getNomePaciente());
 			st.setDate(2, new java.sql.Date(obj.getDataAniversario().getTime()));
+			st.setString(3, obj.getCpf());
+			st.setString(4, obj.getTelefone());
+			st.setInt(5, obj.getIdPaciente());
 
 			st.executeUpdate();
 
@@ -144,7 +150,36 @@ public class PacienteDaoJDBC implements PacienteDao {
 		paciente.setIdPaciente(rs.getInt("Id"));
 		paciente.setNomePaciente(rs.getString("NomePaci"));
 		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("DataAniv").getTime()));
+		paciente.setCpf(rs.getString("cpf"));
+		paciente.setTelefone(rs.getString("telefone"));
 		return paciente;
+	}
+
+	@Override
+	public List<Paciente> findByNome(String nome) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT paciente.* FROM paciente WHERE NomePaci LIKE '" + nome +"%'" + "ORDER BY ID");
+
+			rs = st.executeQuery();
+
+			List<Paciente> list = new ArrayList<>();
+
+			while (rs.next()) {
+
+				Paciente paciente = instatiatePaciente(rs);
+				list.add(paciente);
+			}
+
+			return list;
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+		}
 	}
 
 }
