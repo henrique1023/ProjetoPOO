@@ -124,6 +124,43 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		}
 
 	}
+	
+	@Override
+	public List<Profissional> findByNome(String nome) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+
+		try {
+			st = conn.prepareStatement(
+					"SELECT profissional.*, Espec.NomeEspec as EspecNome " + "FROM profissional INNER JOIN espec "
+							+ "ON profissional.EspecId = espec.Id " + "WHERE profissional.NomeProfi LIKE '" + nome + "%'");
+			rs = st.executeQuery();
+			
+			List<Profissional> list = new ArrayList<>();
+			Map<Integer, Especializacao> map = new HashMap<>();
+			
+			while (rs.next()) {
+				
+				Especializacao espec = map.get(rs.getInt("EspecId"));
+				
+				if (espec == null) {
+					espec = instatiateEspecializacao(rs);
+					map.put(rs.getInt("EspecId"), espec);
+				}
+
+				Profissional prof = instatiateProfissional(rs, espec);
+				list.add(prof);
+			}
+			return list;
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+		}
+
+	}
 
 	private Profissional instatiateProfissional(ResultSet rs, Especializacao espec) throws SQLException {
 		Profissional prof = new Profissional();

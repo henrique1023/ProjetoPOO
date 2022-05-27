@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -22,6 +23,8 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
+            <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#onBtBuscar" text="Button" />
+            <TextField fx:id="txtCampoBuscar" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewProfissional" prefHeight="300.0" prefWidth="600.0">

@@ -26,6 +26,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -42,6 +43,12 @@ public class MedicoListController implements Initializable, DataChangeListener{
 
 	@FXML
 	private Button btNovo;
+	
+	@FXML
+	private Button btBuscar;
+	
+	@FXML
+	private TextField txtCampoBuscar;
 
 	@FXML
 	private TableView<Profissional> tableViewProfissional;
@@ -75,6 +82,19 @@ public class MedicoListController implements Initializable, DataChangeListener{
 		Profissional obj = new Profissional();
 		createDialogForm(obj, "/gui/MedicoForm.fxml", parentStage);
 		
+	}
+	
+	@FXML
+	public void onBtBuscar(ActionEvent event) {
+		if(txtCampoBuscar.getText() == null || txtCampoBuscar.getText().trim().equals("")) {
+			updateTableView();
+			initializeNodes();
+		}else {
+			List<Profissional> list = medicoService.findByNome(txtCampoBuscar.getText().toString());
+			obsList = FXCollections.observableArrayList(list);
+			tableViewProfissional.setItems(obsList);
+			initializeNodes();
+		}
 	}
 
 	@Override

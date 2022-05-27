@@ -134,10 +134,11 @@ public class MedicoFormController implements Initializable {
 
 		ValidationException exception = new ValidationException("Validation Errors");
 
+		obj.setIdProfi(entidade.getIdProfi());
 		obj.setNome(txtNome.getText());
 		obj.setEmail(txtEmail.getText());
 		obj.setSalarioBase(Utils.tryParseToDouble(txtSalario.getText()));
-
+		
 		if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
 			exception.addError("nome", "Campo está vazio!!");
 		}
@@ -157,6 +158,8 @@ public class MedicoFormController implements Initializable {
 
 			obj.setDataAniver(Date.from(instant));
 		}
+
+		obj.setEspecializacao(comboBoxEspec.getValue());
 
 		if (exception.getErrors().size() > 0) {
 			throw exception;
@@ -197,7 +200,7 @@ public class MedicoFormController implements Initializable {
 
 	public void loadAssociatedObjects() {
 		if (especService == null) {
-			throw new IllegalStateException("Department Service was null");
+			throw new IllegalStateException("Sem Especializações!");
 		}
 		List<Especializacao> list = especService.findAll();
 
@@ -205,11 +208,7 @@ public class MedicoFormController implements Initializable {
 		obsList = FXCollections.observableArrayList(list);
 
 		// comboBox só aceita itens que estejam no ObservableList
-		if (list == null) {
-			comboBoxEspec.setItems(obsList);
-		}else {
-			System.out.println(list.size());
-		}
+		comboBoxEspec.setItems(obsList);
 	}
 
 	// Esse metodo inicia os valores no campos
@@ -226,8 +225,6 @@ public class MedicoFormController implements Initializable {
 			dpDataAniv.setValue(LocalDate.parse(sdf.format(entidade.getDataAniver()).toString()));
 
 		}
-		
-		System.out.println(entidade.getEspecializacao());
 
 		if (entidade.getEspecializacao() == null) {
 			comboBoxEspec.getSelectionModel().selectFirst();
@@ -239,22 +236,14 @@ public class MedicoFormController implements Initializable {
 	// esse metodo verifica se tem o erro e manda ele para o label
 	public void setErrorsMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
+		
+		labelErrorNome.setText(fields.contains("nome") ? errors.get("nome") : "");
+		
+		labelErrorEmail.setText(fields.contains("email") ? errors.get("email") : "");
 
-		if (fields.contains("nome")) {
-			labelErrorNome.setText(errors.get("nome"));
-		}
-
-		if (fields.contains("email")) {
-			labelErrorNome.setText(errors.get("email"));
-		}
-
-		if (fields.contains("salario")) {
-			labelErrorNome.setText(errors.get("salario"));
-		}
-
-		if (fields.contains("dataAniv")) {
-			labelErrorNome.setText(errors.get("dataAniv"));
-		}
+		labelErrorSalario.setText(fields.contains("salario") ? errors.get("salario") : "");
+		
+		labelErrorData.setText(fields.contains("dataAniv") ? errors.get("dataAniv") : "");
 	}
 
 }
