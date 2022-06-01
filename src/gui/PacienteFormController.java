@@ -131,7 +131,7 @@ public class PacienteFormController implements Initializable {
 
 		if (txtCpf.getText() == null || txtCpf.getText().trim().equals("")) {
 			obj.setCpf(null);
-		}else if (txtCpf.getText().length() < 11) {
+		}else if (txtCpf.getText().length() > 0 && txtCpf.getText().length() < 11) {
 			exception.addError("cpf", "Campo preenchido incorretamente");
 		}else {
 			obj.setCpf(txtCpf.getText());
@@ -139,7 +139,7 @@ public class PacienteFormController implements Initializable {
 
 		if (txtTelefone.getText() == null || txtTelefone.getText().trim().equals("")) {
 			obj.setTelefone(null);
-		} else if (txtCpf.getText().length() < 11){
+		}else if (txtTelefone.getText().length() > 0 && txtTelefone.getText().length() < 11){
 			exception.addError("telefone", "Campo preenchido incorretamente");
 		}else {
 			obj.setTelefone(txtTelefone.getText());
@@ -190,22 +190,14 @@ public class PacienteFormController implements Initializable {
 	// esse metodo verifica se tem o erro e manda ele para o label
 	public void setErrorsMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
-
-		if (fields.contains("nome")) {
-			labelErrorNome.setText(errors.get("nome"));
-		}
-
-		if (fields.contains("dataAniv")) {
-			labelErrorNome.setText(errors.get("dataAniv"));
-		}
 		
-		if (fields.contains("cpf")) {
-			labelErrorCpf.setText(errors.get("cpf"));
-		}
+		labelErrorNome.setText(fields.contains("nome") ? errors.get("nome") : "" );
+	
+		labelErrorData.setText(fields.contains("dataAniv") ? errors.get("dataAniv") : "");
 		
-		if (fields.contains("telefone")) {
-			labelErrorTelefone.setText(errors.get("telefone"));
-		}
+		labelErrorCpf.setText(fields.contains("cpf") ? errors.get("cpf") : "" );
+		
+		labelErrorTelefone.setText(fields.contains("telefone") ? errors.get("telefone") : "");
 	}
 
 }

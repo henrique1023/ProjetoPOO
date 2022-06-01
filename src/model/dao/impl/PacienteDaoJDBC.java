@@ -26,8 +26,8 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv, cpf, telefone) " + "VALUES " +
-					"(?, ?, ?, ?)" ,
+			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv, cpf, telefone, deletado) " + "VALUES " +
+					"(?, ?, ?, ?, 'f')" ,
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNomePaciente());
