@@ -28,10 +28,10 @@
         <columns>
             <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
             <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="82.0" text="NOME" />
-            <TableColumn fx:id="tableColumnData" prefWidth="129.0" text="DATA ANIVERSARIO" />
-          <TableColumn fx:id="tableColumnCpf" prefWidth="111.0" text="CPF" />
-            <TableColumn fx:id="tableColumnTel" prefWidth="124.0" text="TELEFONE" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="113.0" text="NOME" />
+            <TableColumn fx:id="tableColumnData" prefWidth="130.0" text="DATA ANIVERSARIO" />
+          <TableColumn fx:id="tableColumnCpf" prefWidth="118.0" text="CPF" />
+            <TableColumn fx:id="tableColumnTel" prefWidth="117.0" text="TELEFONE" />
         </columns>
       </TableView>
    </children>

@@ -82,7 +82,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("DELETE FROM paciente " + "WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE paciente SET deletado = 'v' " + "WHERE Id = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -132,9 +132,12 @@ public class PacienteDaoJDBC implements PacienteDao {
 			while (rs.next()) {
 
 				Paciente paciente = instatiatePaciente(rs);
-				list.add(paciente);
+				String teste =  rs.getString("deletado");
+				char c = teste.charAt(0);
+				if(c == 'f') {
+					list.add(paciente);
+				}
 			}
-
 			return list;
 
 		} catch (SQLException e) {
