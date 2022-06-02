@@ -26,6 +26,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -33,49 +34,67 @@ import javafx.stage.Stage;
 import model.entities.Paciente;
 import model.services.PacienteService;
 
-public class PacienteListController implements Initializable, DataChangeListener{
-	
+public class PacienteListController implements Initializable, DataChangeListener {
+
 	private PacienteService paciente;
-	
+
 	@FXML
 	private TableView<Paciente> tableViewPaciente;
-	
+
 	@FXML
 	private TableColumn<Paciente, String> tableColumnCpf;
-	
+
 	@FXML
 	private TableColumn<Paciente, String> tableColumnTel;
-	
+
 	@FXML
 	private TableColumn<Paciente, String> tableColumnNome;
-	
+
 	@FXML
 	private TableColumn<Paciente, Date> tableColumnData;
-	
+
 	@FXML
 	private TableColumn<Paciente, Paciente> tableColumnEDIT;
 
 	@FXML
 	private TableColumn<Paciente, Paciente> tableColumnREMOVE;
-	
-	
+
+	@FXML
+	private TextField txtPesquisa;
+
+	@FXML
+	private Button btPesquisar;
+
 	@FXML
 	private Button btNovo;
-	
+
 	private ObservableList<Paciente> obsList;
-	
+
 	@FXML
 	public void onBtNovoAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
 		Paciente obj = new Paciente();
 		createDialogForm(obj, "/gui/PacienteForm.fxml", parentStage);
-		
+
 	}
-	
+
+	@FXML
+	public void onBtPesquisarAction(ActionEvent event) {
+		if (txtPesquisa.getText() == null || txtPesquisa.getText().trim().equals("")) {
+			updateTableView();
+			initializeNodes();
+		} else {
+			List<Paciente> list = paciente.findByNome(txtPesquisa.getText());
+			obsList = FXCollections.observableArrayList(list);
+			tableViewPaciente.setItems(obsList);
+			initializeNodes();
+		}
+	}
+
 	public void setPacienteService(PacienteService p) {
 		this.paciente = p;
 	}
-	
+
 	private void initializeNodes() {
 		// essa função inicia os valores dentro das tabelas
 		tableColumnCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
@@ -90,7 +109,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewPaciente.prefHeightProperty().bind(stage.heightProperty());
 	}
-	
+
 	private void createDialogForm(Paciente obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -123,9 +142,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
-	
-	
-	
+
 	public void updateTableView() {
 		if (paciente == null) {
 			throw new IllegalStateException("Service was null");
@@ -138,9 +155,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 		initEditButtons();
 		initRemoveButtons();
 	}
-	
-	
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
@@ -150,7 +165,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 	public void onDataChanged() {
 		updateTableView();
 	}
-	
+
 	// ESSE METODO CRIA OS BOTÕES DE EDITAR NO PAINEL
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -165,8 +180,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(
-						event -> createDialogForm(obj, "/gui/PacienteForm.fxml", Utils.currentStage(event)));
+				button.setOnAction(event -> createDialogForm(obj, "/gui/PacienteForm.fxml", Utils.currentStage(event)));
 			}
 		});
 	}
@@ -190,18 +204,18 @@ public class PacienteListController implements Initializable, DataChangeListener
 
 		});
 	}
-	
+
 	private void removeEntity(Paciente obj) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmation", "Are you sure to delete?");
-		
-		if(result.get() == ButtonType.OK) {
-			if(paciente == null) {
+
+		if (result.get() == ButtonType.OK) {
+			if (paciente == null) {
 				throw new IllegalStateException("Service was null");
 			}
 			try {
 				paciente.remove(obj);
 				updateTableView();
-			}catch (DbException e) {
+			} catch (DbException e) {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
 		}

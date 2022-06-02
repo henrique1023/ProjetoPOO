@@ -8,7 +8,7 @@ import model.entities.Paciente;
 
 public class PacienteService {
 	
-	private PacienteDao dao = new DaoFactory().createPacienteDao();
+	private PacienteDao dao = DaoFactory.createPacienteDao();
 	
 	public List<Paciente> findAll(){
 		return dao.findAll();
@@ -25,5 +25,9 @@ public class PacienteService {
 	
 	public void remove(Paciente obj) {
 		dao.deleteById(obj.getIdPaciente());
+	}
+	
+	public List<Paciente> findByNome(String nome){
+		return dao.findByNome(nome);
 	}
 }

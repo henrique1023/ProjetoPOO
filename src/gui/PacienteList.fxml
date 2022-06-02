@@ -5,11 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="300.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PacienteListController">
+<VBox prefHeight="400.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PacienteListController">
    <children>
       <Label prefHeight="23.0" prefWidth="513.0" text="Menu Paciente" textOverrun="CLIP">
          <VBox.margin>
@@ -22,16 +23,18 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
+            <Button fx:id="btPesquisar" mnemonicParsing="false" onAction="#onBtPesquisarAction" text="Button" />
+            <TextField fx:id="txtPesquisa" promptText="Insira nome" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewPaciente" prefHeight="300.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
-            <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="113.0" text="NOME" />
-            <TableColumn fx:id="tableColumnData" prefWidth="130.0" text="DATA ANIVERSARIO" />
-          <TableColumn fx:id="tableColumnCpf" prefWidth="118.0" text="CPF" />
-            <TableColumn fx:id="tableColumnTel" prefWidth="117.0" text="TELEFONE" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="60.0" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="60.0" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="152.0" text="NOME" />
+            <TableColumn fx:id="tableColumnData" prefWidth="142.0" text="DATA ANIVERSARIO" />
+          <TableColumn fx:id="tableColumnCpf" prefWidth="122.0" text="CPF" />
+            <TableColumn fx:id="tableColumnTel" prefWidth="120.0" text="TELEFONE" />
         </columns>
       </TableView>
    </children>

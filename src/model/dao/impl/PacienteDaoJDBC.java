@@ -26,8 +26,8 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO paciente " + "(NomePaci, DataAniv, cpf, telefone, deletado) " + "VALUES " +
-					"(?, ?, ?, ?, 'f')" ,
+			st = conn.prepareStatement("INSERT INTO paciente " + "(nome_paci, data_aniv_paci, cpf_paci, telefone_paci) " + "VALUES " +
+					"(?, ?, ?, ?)" ,
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNomePaciente());
@@ -60,7 +60,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE paciente " + "SET NomePaci = ?, DataAniv = ?, cpf = ?, telefone = ? " 
+			st = conn.prepareStatement("UPDATE paciente " + "SET nome_paci = ?, data_aniv_paci = ?, cpf_paci = ?, telefone_paci = ? " 
 										+ "WHERE Id = ?");
 			st.setString(1, obj.getNomePaciente());
 			st.setDate(2, new java.sql.Date(obj.getDataAniversario().getTime()));
@@ -82,7 +82,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE paciente SET deletado = 'v' " + "WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE paciente SET deletado = 'V' " + "WHERE id = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -100,7 +100,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		ResultSet rs = null;
 
 		try {
-			st = conn.prepareStatement("SELECT paciente.* FROM paciente " + "WHERE paciente.Id = ?");
+			st = conn.prepareStatement("SELECT paciente.* FROM paciente " + "WHERE paciente.id = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
@@ -123,7 +123,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT paciente.* FROM paciente " + "ORDER BY ID");
+			st = conn.prepareStatement("SELECT paciente.* FROM paciente " + "ORDER BY nome_paci");
 
 			rs = st.executeQuery();
 
@@ -134,7 +134,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 				Paciente paciente = instatiatePaciente(rs);
 				String teste =  rs.getString("deletado");
 				char c = teste.charAt(0);
-				if(c == 'f') {
+				if(c == 'F' || c == 'f') {
 					list.add(paciente);
 				}
 			}
@@ -150,11 +150,11 @@ public class PacienteDaoJDBC implements PacienteDao {
 
 	private Paciente instatiatePaciente(ResultSet rs) throws SQLException {
 		Paciente paciente = new Paciente();
-		paciente.setIdPaciente(rs.getInt("Id"));
-		paciente.setNomePaciente(rs.getString("NomePaci"));
-		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("DataAniv").getTime()));
-		paciente.setCpf(rs.getString("cpf"));
-		paciente.setTelefone(rs.getString("telefone"));
+		paciente.setIdPaciente(rs.getInt("id"));
+		paciente.setNomePaciente(rs.getString("nome_paci"));
+		paciente.setDataAniversario(new java.util.Date(rs.getTimestamp("data_aniv_paci").getTime()));
+		paciente.setCpf(rs.getString("cpf_paci"));
+		paciente.setTelefone(rs.getString("telefone_paci"));
 		return paciente;
 	}
 
@@ -163,7 +163,7 @@ public class PacienteDaoJDBC implements PacienteDao {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT paciente.* FROM paciente WHERE NomePaci LIKE '" + nome +"%'" + "ORDER BY ID");
+			st = conn.prepareStatement("SELECT paciente.* FROM paciente WHERE nome_paci LIKE '" + nome +"%'" + "ORDER BY nome_paci");
 
 			rs = st.executeQuery();
 

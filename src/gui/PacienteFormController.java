@@ -130,7 +130,7 @@ public class PacienteFormController implements Initializable {
 		}
 
 		if (txtCpf.getText() == null || txtCpf.getText().trim().equals("")) {
-			obj.setCpf(null);
+			exception.addError("cpf", "Campo precisa ser preenchido");
 		}else if (txtCpf.getText().length() > 0 && txtCpf.getText().length() < 11) {
 			exception.addError("cpf", "Campo preenchido incorretamente");
 		}else {
