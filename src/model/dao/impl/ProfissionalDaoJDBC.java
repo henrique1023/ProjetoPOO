@@ -29,7 +29,8 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO profissional " + "(NomeProfi, Email, DataAniv, SalarioBase, EspecId) "
+			st = conn.prepareStatement("INSERT INTO profissional " + "(nome_profissional, email, data_aniv, "
+					+ "salario_base, espec_id) "
 					+ "VALUES " + "(?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, obj.getNome());
 			st.setString(2, obj.getEmail());
@@ -63,7 +64,8 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 		try {
 			st = conn.prepareStatement("UPDATE profissional "
-					+ "SET NomeProfi = ?, Email = ?, DataAniv = ?, SalarioBase = ?, EspecId = ? " + "WHERE Id = ?");
+					+ "SET nome_profissional = ?, email = ?, data_aniv = ?, salario_base = ?, "
+					+ "espec_id = ? " + "WHERE id = ?");
 			st.setString(1, obj.getNome());
 			st.setString(2, obj.getEmail());
 			st.setDate(3, new java.sql.Date(obj.getDataAniver().getTime()));
@@ -85,7 +87,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("DELETE FROM profissional " + "WHERE Id = ?");
+			st = conn.prepareStatement("DELETE FROM profissional " + "WHERE id = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -104,8 +106,8 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*,Espec.NomeEspec as EspecNome " + "FROM profissional INNER JOIN espec "
-							+ "ON profissional.EspecId = espec.Id " + "WHERE profissional.Id = ?");
+					"SELECT profissional.*,espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
+							+ "ON profissional.espec_id = espec.id " + "WHERE profissional.id = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
@@ -132,8 +134,10 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*, Espec.NomeEspec as EspecNome " + "FROM profissional INNER JOIN espec "
-							+ "ON profissional.EspecId = espec.Id " + "WHERE profissional.NomeProfi LIKE '" + nome + "%'");
+					"SELECT profissional.*, Espec.nome_espec as EspecNome " 
+							+ "FROM profissional INNER JOIN espec "
+							+ "ON profissional.espec_id = espec.id " 
+							+ "WHERE profissional.nome_profissional LIKE '" + nome + "%'");
 			rs = st.executeQuery();
 			
 			List<Profissional> list = new ArrayList<>();
@@ -141,11 +145,11 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 			
 			while (rs.next()) {
 				
-				Especializacao espec = map.get(rs.getInt("EspecId"));
+				Especializacao espec = map.get(rs.getInt("espec_id"));
 				
 				if (espec == null) {
 					espec = instatiateEspecializacao(rs);
-					map.put(rs.getInt("EspecId"), espec);
+					map.put(rs.getInt("espec_id"), espec);
 				}
 
 				Profissional prof = instatiateProfissional(rs, espec);
@@ -164,18 +168,18 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 	private Profissional instatiateProfissional(ResultSet rs, Especializacao espec) throws SQLException {
 		Profissional prof = new Profissional();
-		prof.setIdProfi(rs.getInt("Id"));
-		prof.setNome(rs.getString("NomeProfi"));
-		prof.setEmail(rs.getString("Email"));
-		prof.setSalarioBase(rs.getDouble("SalarioBase"));
-		prof.setDataAniver(new java.util.Date(rs.getTimestamp("DataAniv").getTime()));
+		prof.setIdProfi(rs.getInt("id"));
+		prof.setNome(rs.getString("nome_profissional"));
+		prof.setEmail(rs.getString("email"));
+		prof.setSalarioBase(rs.getDouble("salario_base"));
+		prof.setDataAniver(new java.util.Date(rs.getTimestamp("data_aniv").getTime()));
 		prof.setEspecializacao(espec);
 		return prof;
 	}
 
 	private Especializacao instatiateEspecializacao(ResultSet rs) throws SQLException {
 		Especializacao espec = new Especializacao();
-		espec.setIdEspeci(rs.getInt("EspecId"));
+		espec.setIdEspeci(rs.getInt("espec_id"));
 		espec.setNomeEspeci(rs.getString("EspecNome"));
 		return espec;
 	}
@@ -186,8 +190,8 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*,Espec.NomeEspec as EspecNome " + "FROM profissional INNER JOIN espec "
-							+ "ON profissional.EspecId = espec.Id " + "ORDER BY Id");
+					"SELECT profissional.*,Espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
+							+ "ON profissional.espec_id = espec.id " + "ORDER BY id");
 
 			rs = st.executeQuery();
 
@@ -196,11 +200,11 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 			while (rs.next()) {
 
-				Especializacao espec = map.get(rs.getInt("EspecId"));
+				Especializacao espec = map.get(rs.getInt("espec_id"));
 
 				if (espec == null) {
 					espec = instatiateEspecializacao(rs);
-					map.put(rs.getInt("EspecId"), espec);
+					map.put(rs.getInt("espec_id"), espec);
 				}
 
 				Profissional prof = instatiateProfissional(rs, espec);
@@ -223,8 +227,8 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*,Espec.NomeEspec as EspecNome " + "FROM profissional INNER JOIN espec "
-							+ "ON profissional.EspecId = espec.Id " + "WHERE EspecId = ? " + "ORDER BY Name");
+					"SELECT profissional.*,Espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
+							+ "ON profissional.espec_id = espec.id " + "WHERE espec_id = ? " + "ORDER BY EspecNome");
 			st.setInt(1, especializao.getIdEspeci());
 
 			rs = st.executeQuery();
@@ -234,11 +238,11 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 			while (rs.next()) {
 
-				Especializacao espec = map.get(rs.getInt("EspecId"));
+				Especializacao espec = map.get(rs.getInt("espec_id"));
 
 				if (espec == null) {
 					espec = instatiateEspecializacao(rs);
-					map.put(rs.getInt("EspecId"), espec);
+					map.put(rs.getInt("espec_id"), espec);
 				}
 
 				Profissional prof = instatiateProfissional(rs, espec);

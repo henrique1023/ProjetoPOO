@@ -2,13 +2,13 @@ package model.services;
 
 import java.util.List;
 
-import model.dao.DaoFactory;
 import model.dao.ConsultaDao;
+import model.dao.DaoFactory;
 import model.entities.Consulta;
 
 public class ConsultaService {
 
-	private ConsultaDao dao = new DaoFactory().createConsultaDao();
+	private ConsultaDao dao = DaoFactory.createConsultaDao();
 	
 	public List<Consulta> findAll(){
 		return dao.findAll();

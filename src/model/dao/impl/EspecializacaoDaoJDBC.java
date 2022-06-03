@@ -26,9 +26,8 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("INSERT INTO espec " + "(NomeEspec) " + "VALUES " +
-					"(?)" ,
-					Statement.RETURN_GENERATED_KEYS);
+			st = conn.prepareStatement("INSERT INTO espec " + "(nome_espec) " 
+					+ "VALUES (?)" , Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNomeEspeci());
 
@@ -57,7 +56,7 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("UPDATE espec " + "SET NomeEspec = ?" + "WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE espec " + "SET nome_espec = ?" + "WHERE id = ?");
 			st.setString(1, obj.getNomeEspeci());
 
 			st.executeUpdate();
@@ -139,8 +138,8 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 
 	private Especializacao instatiateEspecializacao(ResultSet rs) throws SQLException {
 		Especializacao espec = new Especializacao();
-		espec.setIdEspeci(rs.getInt("Id"));
-		espec.setNomeEspeci(rs.getString("NomeEspec"));
+		espec.setIdEspeci(rs.getInt("id"));
+		espec.setNomeEspeci(rs.getString("nome_espec"));
 		return espec;
 	}
 }

@@ -8,7 +8,7 @@ import model.entities.Diagnostico;
 
 public class DiagnosticoService {
 
-	private DiagnosticoDao dao = new DaoFactory().createDiagnosticoDao();
+	private DiagnosticoDao dao = DaoFactory.createDiagnosticoDao();
 	
 	public List<Diagnostico> findAll(){
 		return dao.findAll();
