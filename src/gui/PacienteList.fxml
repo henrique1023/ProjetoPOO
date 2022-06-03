@@ -30,8 +30,8 @@
       <TableView fx:id="tableViewPaciente" prefHeight="300.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="tableColumnEDIT" prefWidth="60.0" />
-            <TableColumn fx:id="tableColumnREMOVE" prefWidth="60.0" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="152.0" text="NOME" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="65.0" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="147.0" text="NOME" />
             <TableColumn fx:id="tableColumnData" prefWidth="142.0" text="DATA ANIVERSARIO" />
           <TableColumn fx:id="tableColumnCpf" prefWidth="122.0" text="CPF" />
             <TableColumn fx:id="tableColumnTel" prefWidth="120.0" text="TELEFONE" />

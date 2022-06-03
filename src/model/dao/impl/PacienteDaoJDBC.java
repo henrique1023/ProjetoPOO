@@ -132,9 +132,9 @@ public class PacienteDaoJDBC implements PacienteDao {
 			while (rs.next()) {
 
 				Paciente paciente = instatiatePaciente(rs);
-				String teste =  rs.getString("deletado");
-				char c = teste.charAt(0);
-				if(c == 'F' || c == 'f') {
+				String dl =  rs.getString("deletado");
+				char cdl = dl.charAt(0);
+				if(cdl == 'F' || cdl == 'f') {
 					list.add(paciente);
 				}
 			}
@@ -172,7 +172,11 @@ public class PacienteDaoJDBC implements PacienteDao {
 			while (rs.next()) {
 
 				Paciente paciente = instatiatePaciente(rs);
-				list.add(paciente);
+				String dl =  rs.getString("deletado");
+				char cdl = dl.charAt(0);
+				if(cdl == 'F' || cdl == 'f') {
+					list.add(paciente);
+				}
 			}
 
 			return list;

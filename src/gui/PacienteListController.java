@@ -189,7 +189,7 @@ public class PacienteListController implements Initializable, DataChangeListener
 	private void initRemoveButtons() {
 		tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnREMOVE.setCellFactory(param -> new TableCell<Paciente, Paciente>() {
-			private final Button button = new Button("Delete");
+			private final Button button = new Button("Deletar");
 
 			@Override
 			protected void updateItem(Paciente obj, boolean empty) {

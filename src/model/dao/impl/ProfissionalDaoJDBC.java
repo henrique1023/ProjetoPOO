@@ -87,7 +87,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("DELETE FROM profissional " + "WHERE id = ?");
+			st = conn.prepareStatement("UPDATE profissional SET deletado = 'V' " + "WHERE id = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -144,16 +144,19 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 			Map<Integer, Especializacao> map = new HashMap<>();
 			
 			while (rs.next()) {
-				
-				Especializacao espec = map.get(rs.getInt("espec_id"));
-				
-				if (espec == null) {
-					espec = instatiateEspecializacao(rs);
-					map.put(rs.getInt("espec_id"), espec);
+				String dl = rs.getString("deletado");
+				char cdl = dl.charAt(0);
+				if(cdl == 'F') {
+					Especializacao espec = map.get(rs.getInt("espec_id"));
+					
+					if (espec == null) {
+						espec = instatiateEspecializacao(rs);
+						map.put(rs.getInt("espec_id"), espec);
+					}
+	
+					Profissional prof = instatiateProfissional(rs, espec);
+					list.add(prof);
 				}
-
-				Profissional prof = instatiateProfissional(rs, espec);
-				list.add(prof);
 			}
 			return list;
 
@@ -199,16 +202,20 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 			Map<Integer, Especializacao> map = new HashMap<>();
 
 			while (rs.next()) {
-
-				Especializacao espec = map.get(rs.getInt("espec_id"));
-
-				if (espec == null) {
-					espec = instatiateEspecializacao(rs);
-					map.put(rs.getInt("espec_id"), espec);
+				
+				String dl = rs.getString("deletado");
+				char cdl = dl.charAt(0);
+				if(cdl == 'F') {
+					Especializacao espec = map.get(rs.getInt("espec_id"));
+	
+					if (espec == null) {
+						espec = instatiateEspecializacao(rs);
+						map.put(rs.getInt("espec_id"), espec);
+					}
+	
+					Profissional prof = instatiateProfissional(rs, espec);
+					list.add(prof);
 				}
-
-				Profissional prof = instatiateProfissional(rs, espec);
-				list.add(prof);
 			}
 
 			return list;
