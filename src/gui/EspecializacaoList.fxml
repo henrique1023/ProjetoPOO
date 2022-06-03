@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="414.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EspecializacaoController">
+   <children>
+      <Label prefHeight="36.0" text="Menu Especialização" textOverrun="CLIP">
+         <VBox.margin>
+            <Insets right="10.0" top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Franklin Gothic Heavy Italic" size="25.0" />
+         </font>
+      </Label>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
+            <Button fx:id="btBuscar" mnemonicParsing="false" text="Buscar" />
+            <TextField fx:id="txtCampoBuscar" prefHeight="25.0" prefWidth="194.0" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewEspecializacao" prefHeight="300.0" prefWidth="680.0">
+        <columns>
+            <TableColumn fx:id="tableColumnEDIT" minWidth="15.0" prefWidth="84.0" />
+            <TableColumn fx:id="tableColumnREMOVE" prefWidth="95.0" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="482.0" text="NOME ESPECIALIZAÇÃO" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

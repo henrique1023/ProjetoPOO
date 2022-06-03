@@ -3,40 +3,42 @@ package model.entities;
 import java.util.Objects;
 
 public class Especializacao {
-	private Integer IdEspeci;
-	private String NomeEspeci;
+	private Integer idEspeci;
+	private String nomeEspeci;
 	
 	public Especializacao() {
 	}
+
 	public Especializacao(Integer idEspeci, String nomeEspeci) {
-		IdEspeci = idEspeci;
-		NomeEspeci = nomeEspeci;
+		super();
+		this.idEspeci = idEspeci;
+		this.nomeEspeci = nomeEspeci;
 	}
 
 	public Integer getIdEspeci() {
-		return IdEspeci;
+		return idEspeci;
 	}
 
 	public void setIdEspeci(Integer idEspeci) {
-		IdEspeci = idEspeci;
+		this.idEspeci = idEspeci;
 	}
 
 	public String getNomeEspeci() {
-		return NomeEspeci;
+		return nomeEspeci;
 	}
 
 	public void setNomeEspeci(String nomeEspeci) {
-		NomeEspeci = nomeEspeci;
+		this.nomeEspeci = nomeEspeci;
 	}
 
 	@Override
 	public String toString() {
-		return NomeEspeci;
+		return "Especializacao [idEspeci=" + idEspeci + ", nomeEspeci=" + nomeEspeci + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(IdEspeci);
+		return Objects.hash(idEspeci);
 	}
 
 	@Override
@@ -48,7 +50,8 @@ public class Especializacao {
 		if (getClass() != obj.getClass())
 			return false;
 		Especializacao other = (Especializacao) obj;
-		return Objects.equals(IdEspeci, other.IdEspeci);
+		return Objects.equals(idEspeci, other.idEspeci);
 	}
+	
 
 }
