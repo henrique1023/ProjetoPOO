@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-import application.Main;
+import application.mainfx.Main;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +19,8 @@ import javafx.scene.layout.VBox;
 import model.services.EspecializacaoService;
 import model.services.PacienteService;
 import model.services.ProfissionalService;
+
+
 
 public class MainViewController implements Initializable {
 	

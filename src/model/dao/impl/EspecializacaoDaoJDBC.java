@@ -73,7 +73,7 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 		PreparedStatement st = null;
 
 		try {
-			st = conn.prepareStatement("DELETE FROM espec " + "WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE espec SET deletado = 'V' " + "WHERE Id = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -121,9 +121,13 @@ public class EspecializacaoDaoJDBC implements EspecializacaoDao{
 			List<Especializacao> list = new ArrayList<>();
 
 			while (rs.next()) {
-
-				Especializacao espec = instatiateEspecializacao(rs);
-				list.add(espec);
+				
+				String dl =  rs.getString("deletado");
+				char cdl = dl.charAt(0);
+				if(cdl == 'F' || cdl == 'f') {
+					Especializacao espec = instatiateEspecializacao(rs);
+					list.add(espec);
+				}
 			}
 
 			return list;

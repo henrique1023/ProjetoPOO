@@ -1,4 +1,4 @@
-package application;
+package application.mainfx;
 
 import java.io.IOException;
 
