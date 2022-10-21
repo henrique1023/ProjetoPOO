@@ -134,7 +134,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*, Espec.nome_espec as EspecNome " 
+					"SELECT profissional.*, espec.nome_espec as EspecNome " 
 							+ "FROM profissional INNER JOIN espec "
 							+ "ON profissional.espec_id = espec.id " 
 							+ "WHERE profissional.nome_profissional LIKE '" + nome + "%'");
@@ -193,7 +193,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*,Espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
+					"SELECT profissional.*, espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
 							+ "ON profissional.espec_id = espec.id " + "ORDER BY id");
 
 			rs = st.executeQuery();
@@ -234,7 +234,7 @@ public class ProfissionalDaoJDBC implements ProfissionalDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT profissional.*,Espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
+					"SELECT profissional.*, espec.nome_espec as EspecNome " + "FROM profissional INNER JOIN espec "
 							+ "ON profissional.espec_id = espec.id " + "WHERE espec_id = ? " + "ORDER BY EspecNome");
 			st.setInt(1, especializao.getIdEspeci());
 

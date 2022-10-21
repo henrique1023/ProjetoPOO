@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/UserLibrary"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/User Library"/>
 	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src">
@@ -19,4 +20,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
+=======
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySqlConnector"/>
+	<classpathentry kind="lib" path="/home/henrique/Documentos/sqljdbc_9.2/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar"/>
+	<classpathentry kind="output" path="bin"/>
+>>>>>>> master
 </classpath>
