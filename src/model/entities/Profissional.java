@@ -2,8 +2,23 @@ package model.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_profissional")
 public class Profissional {
+	
+	@ManyToOne
+	@JoinColumn(name = "id_especializacao")
 	private Especializacao especializacao;
+	
+	@Id
+	@Column(name = "id")
 	private Integer idProfi;
 	private String nome;
 	private String email;

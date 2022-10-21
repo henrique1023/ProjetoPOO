@@ -2,11 +2,23 @@ package model.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Consulta {
+	
+	@Id
+	@Column(name = "id_consulta")
 	private Integer idConsulta;
+	
 	private Diagnostico diagnostico;
+	
 	private Paciente paciente;
+	
 	private Profissional profissional;
+	
 	private Date dataConsul;
 	
 	public Consulta() {

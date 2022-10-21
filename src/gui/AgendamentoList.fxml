@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="414.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MedicoListController">
+   <children>
+      <Label contentDisplay="CENTER" prefHeight="57.0" prefWidth="662.0" text="Agendamento" textOverrun="CLIP">
+         <VBox.margin>
+            <Insets right="10.0" top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Franklin Gothic Heavy Italic" size="25.0" />
+         </font>
+      </Label>
+      <ToolBar prefHeight="137.0" prefWidth="672.0">
+         <items>
+            <GridPane prefHeight="108.0" prefWidth="652.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="75.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="275.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="64.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="266.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Nome" />
+                  <Label text="CPF" GridPane.rowIndex="1" />
+                  <Label text="Data" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="1" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Criar Agendamento" GridPane.columnIndex="3" />
+                  <Button mnemonicParsing="false" text="Pesquisar Agendamento" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </items>
+      </ToolBar>
+      <TableView fx:id="tableViewProfissional" prefHeight="300.0" prefWidth="680.0">
+        <columns>
+            <TableColumn prefWidth="61.0" />
+            <TableColumn prefWidth="60.0" />
+          <TableColumn prefWidth="123.0" text="Nome Paciente" />
+          <TableColumn prefWidth="119.0" text="Data Consulta" />
+            <TableColumn prefWidth="131.0" text="Especialidade" />
+            <TableColumn prefWidth="75.0" text="Medico" />
+            <TableColumn prefWidth="101.0" text="Status Consulta" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
